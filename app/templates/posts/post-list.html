@@ -12,25 +12,23 @@
         {% else %}
             <p class="text-end fs-4">Please <a href="{% url 'auth:login' %}">login</a> to create posts.</p>
         {% endif %}
-        <div class="card p-3">
-            <h3>Latest Posts</h3>
-            <div class="row">
-                {% for post in posts %}
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <p class="card-text">Status: {{ post.status }}</p>
-                                <a href="{% url 'post:post_detail' post.pk %}" class="btn btn-secondary">View Post</a>
-                            </div>
+        <h3>Latest Posts</h3>
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">Status: {{ post.status }}</p>
+                            <a href="{% url 'post:post_detail' post.pk %}" class="btn btn-secondary">View Post</a>
                         </div>
                     </div>
-                {% empty %}
-                    <div class="col-12">
-                        <div class="alert alert-warning">No posts available.</div>
-                    </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-warning">No posts available.</div>
+                </div>
+            {% endfor %}
         </div>
         <br>
         <a href="{% url 'home' %}" class="btn btn-primary float-end p-2 w-25">Back</a>

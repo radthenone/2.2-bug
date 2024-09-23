@@ -21,7 +21,7 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.text }}</p>
             <a href="{% url 'post:post_detail' post.pk %}" class="btn btn-primary">Read</a>
-            <h5 class="card-subtitle p-1">{{ post.author.username }}</h5>
+            <h5 class="card-subtitle p-1">Author:          {{ post.author.username }}</h5>
             <h5 class="card-footer">Status: {{ post.status }} - Created: {{ post.get_created_date }}</h5>
         </div>
     </div>
