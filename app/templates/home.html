@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - My Blog{% endblock %}
+{% block styles %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="home">
+    <h2>Blog Home</h2>
+    <p>This is the home page where you can find the latest posts and updates.</p>
+    {% if user.is_authenticated %}
+        <p class="text-end fs-5">Hello, {{ user.username }}!</p>
+        <a href="{% url 'posts:post_create' %}" class="btn btn-primary">Create Post</a>
+    {% endif %}
+    <h3 class="mt-5">Latest Posts</h3>
+    {% for post in posts %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.text }}</p>
+            <a href="{% url 'post:post_detail' post.pk %}" class="btn btn-primary">Read</a>
+            <h5 class="card-subtitle p-1">{{ post.author.username }}</h5>
+            <h5 class="card-footer">Status: {{ post.status }} - Created: {{ post.get_created_date }}</h5>
+        </div>
+    </div>
+    {% empty %}
+        <div class="alert alert-warning">No posts available.</div>
+    {% endfor %}
+</div>
+{% endblock %}

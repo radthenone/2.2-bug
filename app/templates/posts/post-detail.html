@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5 post-detail">
+    <h1 class="mb-3">{{ object.title }}</h1>
+    <p class="text-muted">By {{ object.author.username }} on {{ object.created_date }}</p>
+    <p>Status: <strong>{{ object.status }}</strong></p>
+    <p class="lead">{{ object.text }}</p>
+
+    {% if user.is_authenticated and object.author == user %}
+        <div class="mt-4">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="edit" class="btn btn-warning me-2">Edit</button>
+                <button type="submit" name="publish" class="btn btn-success">Publish</button>
+            </form>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-primary mt-4">Back to home</a>
+</div>
+{% endblock %}
+
+
